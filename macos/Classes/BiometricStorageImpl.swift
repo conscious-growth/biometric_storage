@@ -231,7 +231,7 @@ class BiometricStorageImpl {
       context.localizedCancelTitle = "Checking auth support"
     }
     var error: NSError?
-    if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+    if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
       result("Success")
       return
     }
