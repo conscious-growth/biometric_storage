@@ -14,7 +14,6 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.*
 import io.flutter.plugin.common.*
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
-import io.flutter.plugin.common.MethodChannel.Result
 import mu.KotlinLogging
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -296,11 +295,11 @@ class BiometricStoragePlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
                 .setConfirmationRequired(promptInfo.confirmationRequired)
 
         val biometricOnly =
-            options.androidBiometricOnly || Build.VERSION.SDK_INT < Build.VERSION_CODES.R
+            options.biometricOnly || Build.VERSION.SDK_INT < Build.VERSION_CODES.R
 
         if (biometricOnly) {
-            if (!options.androidBiometricOnly) {
-                logger.debug { "androidBiometricOnly was false, but prior " +
+            if (!options.biometricOnly) {
+                logger.debug { "biometricOnly was false, but prior " +
                         "to ${Build.VERSION_CODES.R} this was not supported. ignoring." }
             }
             promptBuilder

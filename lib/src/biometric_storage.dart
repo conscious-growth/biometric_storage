@@ -84,7 +84,7 @@ class StorageFileInitOptions {
   StorageFileInitOptions({
     this.authenticationValidityDurationSeconds = -1,
     this.authenticationRequired = true,
-    this.androidBiometricOnly = true,
+    this.biometricOnly = true,
   });
 
   final int authenticationValidityDurationSeconds;
@@ -94,21 +94,20 @@ class StorageFileInitOptions {
   /// will simply be save encrypted. (default: true)
   final bool authenticationRequired;
 
-  /// Only makes difference on Android, where if set true, you can't use
-  /// PIN/pattern/password to get the file.
+  /// When set true, you can't use PIN/pattern/password to get the file.
   /// On Android < 30 this will always be ignored. (always `true`)
   /// https://github.com/authpass/biometric_storage/issues/12#issuecomment-900358154
   ///
   /// Also: this **must** be `true` if [authenticationValidityDurationSeconds]
   /// is `-1`.
   /// https://github.com/authpass/biometric_storage/issues/12#issuecomment-902508609
-  final bool androidBiometricOnly;
+  final bool biometricOnly;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'authenticationValidityDurationSeconds':
             authenticationValidityDurationSeconds,
         'authenticationRequired': authenticationRequired,
-        'androidBiometricOnly': androidBiometricOnly,
+        'biometricOnly': biometricOnly,
       };
 }
 

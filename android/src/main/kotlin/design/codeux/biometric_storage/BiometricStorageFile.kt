@@ -17,7 +17,7 @@ private val logger = KotlinLogging.logger {}
 data class InitOptions(
     val authenticationValidityDurationSeconds: Int = -1,
     val authenticationRequired: Boolean = true,
-    val androidBiometricOnly: Boolean = true
+    val biometricOnly: Boolean = true
 )
 
 class BiometricStorageFile(
@@ -84,8 +84,8 @@ class BiometricStorageFile(
     }
 
     private fun validateOptions() {
-        if (options.authenticationValidityDurationSeconds == -1 && !options.androidBiometricOnly) {
-            throw IllegalArgumentException("when authenticationValidityDurationSeconds is -1, androidBiometricOnly must be true")
+        if (options.authenticationValidityDurationSeconds == -1 && !options.biometricOnly) {
+            throw IllegalArgumentException("when authenticationValidityDurationSeconds is -1, biometricOnly must be true")
         }
     }
 

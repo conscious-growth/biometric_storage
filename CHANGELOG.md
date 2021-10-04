@@ -1,3 +1,6 @@
+## 3.1.0-rc.1
+* **Breaking Change**: changed `androidBiometricOnly`  to `biometricOnly`.
+
 ## 3.0.1
 
 * Android: Validate options on `int`
