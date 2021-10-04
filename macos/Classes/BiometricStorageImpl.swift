@@ -16,9 +16,11 @@ class InitOptions {
   init(params: [String: Any]) {
     authenticationValidityDurationSeconds = params["authenticationValidityDurationSeconds"] as? Int
     authenticationRequired = params["authenticationRequired"] as? Bool
+    biometricOnly = params["biometricOnly"] as? Bool
   }
   let authenticationValidityDurationSeconds: Int!
   let authenticationRequired: Bool!
+  let biometricOnly: Bool!
 }
 
 class IOSPromptInfo {
@@ -177,7 +179,7 @@ class BiometricStorageImpl {
       }
       let access = SecAccessControlCreateWithFlags(nil, // Use the default allocator.
         kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
-        .userPresence,
+        initOptions.biometricOnly ? [.biometryCurrentSet] : [.userPresence],
         nil) // Ignore any error.
       query.merge([
         kSecUseAuthenticationContext as String: context,
