@@ -177,9 +177,13 @@ class BiometricStorageImpl {
           hpdebug("Pre OSX 10.12 no touchIDAuthenticationAllowableReuseDuration available. ignoring.")
         }
       }
+      let accessControlFlags = initOptions.biometricOnly ? [.biometryCurrentSet] : [.userPresence]
+      let biometricOnly = initOptions.biometricOnly
+      hpdebug("Biometric setting \(biometricOnly)")
+      hpdebug("Access Control Flags \(accessControlFlags)")
       let access = SecAccessControlCreateWithFlags(nil, // Use the default allocator.
         kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
-        initOptions.biometricOnly ? [.biometryCurrentSet] : [.userPresence],
+        accessControlFlags,
         nil) // Ignore any error.
       query.merge([
         kSecUseAuthenticationContext as String: context,
